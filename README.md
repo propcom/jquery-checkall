@@ -35,8 +35,5 @@ the set of checked associated items changes.
 
 ## Bugs
 
-If any of your checkboxes are disabled they are still affected by the check-all
-checkbox.
-
 If all of your checkboxes are already checked on load it doesn't check the
 checkbox.

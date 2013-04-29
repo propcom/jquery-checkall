@@ -26,7 +26,7 @@
 		// FIXME: I think this will go wrong in IE so we should store this truth value separately.
 		$elem.change(function(){
 			var c = $elem.is(':checked');
-			$related.prop('checked', c);
+			related().prop('checked', c);
 
 			if (c) {
 				$elem.removeClass('part-checked').addClass('checked');
@@ -38,14 +38,16 @@
 			options.onChange && options.onChange($elem);
 		});
 
-		$related.change(function(){
-			if ($related.filter(':checked').length == $related.length) {
+		related().change(function(){
+			var $rel = related();
+
+			if ($rel.filter(':checked').length == $rel.length) {
 				$elem.prop('checked', true);
 				$elem.removeClass('part-checked').addClass('checked');
 
 				options.onChange && options.onChange($elem);
 			}
-			else if($related.not(':checked').length == $related.length) {
+			else if($rel.not(':checked').length == $rel.length) {
 				$elem.prop('checked', false);
 				$elem.removeClass('part-checked').removeClass('checked');
 
@@ -59,5 +61,9 @@
 				}
 			}
 		});
+
+		function related() {
+			return $related.not(':disabled');
+		}
 	};
 })(jQuery);
