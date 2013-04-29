@@ -42,25 +42,50 @@
 			var $rel = related();
 
 			if ($rel.filter(':checked').length == $rel.length) {
-				$elem.prop('checked', true);
-				$elem.removeClass('part-checked').addClass('checked');
-
+				check(true);
 				options.onChange && options.onChange($elem);
 			}
 			else if($rel.not(':checked').length == $rel.length) {
-				$elem.prop('checked', false);
-				$elem.removeClass('part-checked').removeClass('checked');
-
+				check(false);
 				options.onChange && options.onChange($elem);
 			}
 			else {
 				// Part-checked -> part-checked is not a change, so test.
 				if (! $elem.hasClass('part-checked')) {
-					$elem.addClass('part-checked').removeClass('checked').prop('checked', false);
+					check();
 					options.onChange && options.onChange($elem);
 				}
 			}
 		});
+
+		function check(all) {
+			if (all) {
+				$elem.prop('checked', true);
+				$elem.removeClass('part-checked').addClass('checked');
+			}
+			else if (all === undefined) {
+				$elem.addClass('part-checked').removeClass('checked').prop('checked', false);
+			}
+			else {
+				$elem.prop('checked', false);
+				$elem.removeClass('part-checked').removeClass('checked');
+			}
+		}
+
+		(function() {
+			var $r = related(),
+				$c = $r.filter(':checked');
+
+			if ($c.length == $r.length) {
+				check(true);
+			}
+			else if($c.length == 0) {
+				check(false);
+			}
+			else {
+				check();
+			}
+		})();
 
 		function related() {
 			return $related.not(':disabled');

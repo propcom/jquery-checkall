@@ -35,5 +35,4 @@ the set of checked associated items changes.
 
 ## Bugs
 
-If all of your checkboxes are already checked on load it doesn't check the
-checkbox.
+None known. Report [here](https://github.com/propcom/jquery-checkall/issues).
