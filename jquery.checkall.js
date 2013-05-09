@@ -26,7 +26,7 @@
 		// FIXME: I think this will go wrong in IE so we should store this truth value separately.
 		$elem.change(function(){
 			var c = $elem.is(':checked');
-			related().prop('checked', c);
+			related()[c ? 'not' : 'filter'](':checked').prop('checked', c).trigger('change');
 
 			if (c) {
 				$elem.removeClass('part-checked').addClass('checked');
